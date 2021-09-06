@@ -1,9 +1,9 @@
 /*
 Caleb Harris
-CS1450 - Data Structures and Algorithms
+CS2300 - Computational Linear Algebra
 Section: (T/R) 
 Due date 
-Assignment #
+Assignment PA
 
 Description:
 Short description of what the assignment is about  
