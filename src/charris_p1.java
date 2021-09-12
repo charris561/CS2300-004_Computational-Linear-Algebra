@@ -14,14 +14,13 @@ next parts of this assignment.
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Scanner;
 
 public class charris_p1 {
 
     public static void main(String[] args) throws IOException {
 
         //allocate memory for matrix 1
-        int[][] mat1 = new int[5][6];
+        double[][] mat1 = new double[5][6];
 
         //fill mat1
         fillArrayRowFirst(mat1, 0, 1);
@@ -30,7 +29,7 @@ public class charris_p1 {
         printMatrix(mat1, "charris_p1_mat1.txt");
 
         //allocate memory for matrix 2
-        int[][] mat2 = new int[6][5];
+        double[][] mat2 = new double[6][5];
 
         //fill mat2
         fillArrayColFirst(mat2, 2, 3);
@@ -48,7 +47,7 @@ public class charris_p1 {
         printMatrix(mat3, "charris_p1_mat3.txt");
 
         //allocate memory for array 4
-        int[][] mat4 = new int[5][9];
+        double[][] mat4 = new double[5][9];
 
         //fill mat4
         fillArrayColFirst(mat4, 3, 2);
@@ -57,7 +56,7 @@ public class charris_p1 {
         printMatrix(mat4, "charris_p1_mat4.txt");
 
         //allocate memory for array 5
-        int[][] mat5 = new int[5][9];
+        double[][] mat5 = new double[5][9];
 
         //fill array
         fillArrayRowFirst(mat5, -7,1);
@@ -67,33 +66,12 @@ public class charris_p1 {
 
     }//end main
 
-    //Method printMatrix prints out the passed in matrix
-    public static void printMatrix(int mat[][], String file) throws IOException {
 
-        //open file for printing
-        File fileName = new File(file);
-        PrintWriter outputFile = new PrintWriter(fileName);
+    /*
+    Methods:
+     */
 
-        //iterate through rows and columns and prints out data
-        for (int row = 0; row < mat.length; row++) {
-
-            for (int col = 0; col < mat[row].length; col++) {
-
-                outputFile.print(mat[row][col] + " ");
-
-            }//end col for
-
-            //goes to next line
-            outputFile.println("");
-
-        }//end row for
-
-        //close outputFile
-        outputFile.close();
-
-    }//end printMatrix
-
-    //overloads the printMatrix method in case there is a double
+    //printMatrix method prints out the passed in matrix
     public static void printMatrix(double mat[][], String file) throws IOException {
 
         //open file for printing
@@ -105,38 +83,26 @@ public class charris_p1 {
 
             for (int col = 0; col < mat[row].length; col++) {
 
-                outputFile.printf("%.1f ", mat[row][col]);
+                outputFile.printf("%.1f", mat[row][col]);
+
+                //prints a space unless it's the last column
+                if (col < (mat[row].length - 1)){
+                    outputFile.print(" ");
+                }
 
             }//end col for
 
-            //goes to next line
-            outputFile.println("");
+            //goes to next line unless last row
+            if (row < (mat.length - 1)) {
+                outputFile.println("");
+            }
 
         }//end row for
 
         //close outputFile
         outputFile.close();
 
-    }//end overloaded printMatrix method
-
-    //passes in the starting value, the iteration value, then increments over columns then rows
-    public static void fillArrayColFirst(int[][] mat, int startVal, int incrmntVal) {
-
-        //iterate through columns
-        for (int col = 0; col < mat[0].length; col++) {
-
-            //iterate through rows
-            for (int row = 0; row < mat.length; row++) {
-
-                //assigns values to arrays
-                mat[row][col] = startVal;
-                startVal += incrmntVal;
-
-            }//end for
-
-        }//end for
-
-    }//end fillArray method
+    }//end printMatrix method
 
     //overloads fillArrayColFirst to handle doubles
     public static void fillArrayColFirst(double[][] mat, double startVal, double incrmntVal) {
@@ -158,7 +124,7 @@ public class charris_p1 {
     }//end overloaded fillArrayColFirst
 
     //fill array row first-> fills value based on start val, iteration val
-    public static void fillArrayRowFirst(int[][] mat, int startVal, int incrmntVal) {
+    public static void fillArrayRowFirst(double[][] mat, double startVal, double incrmntVal) {
 
         //iterate through rows
         for (int row = 0; row < mat.length; row++) {
@@ -175,24 +141,5 @@ public class charris_p1 {
         }//end for
 
     }//end fill array row first
-
-    //overloads fillArrayRowFirst to handle doubles
-    public static void fillArrayRowFirst(double[][] mat, double startVal, double incrmntVal) {
-
-        //iterate through columns
-        for (int col = 0; col < mat[0].length; col++) {
-
-            //iterate through rows
-            for (int row = 0; row < mat.length; row++) {
-
-                //assigns values to arrays
-                mat[row][col] = startVal;
-                startVal += incrmntVal;
-
-            }//end for
-
-        }//end for
-
-    }//end overloaded fillArrayColFirst
 
 }//end charris_p1

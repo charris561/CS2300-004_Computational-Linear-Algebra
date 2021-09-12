@@ -11,8 +11,8 @@ add the two matrices, and either output the resultant matrix or
 output an error
 */
 
+
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -20,14 +20,14 @@ public class charris_p2a {
 
     public static void main(String[] args) throws IOException {
 
-        //allocate memory for matrix
-        int[][] matA = mallocMat("charris_p1_mat1.txt");
+        //allocate memory for matrices
+        double[][] matA = mallocMat("charris_p1_mat1.txt");
+        double[][] matB = mallocMat("charris_p1_mat2.txt");
+        double[][] matC = mallocMat("charris_p1_mat3.txt");
+        double[][] matD = mallocMat("charris_p1_mat4.txt");
+        double[][] matF = mallocMat("charris_p1_mat5.txt");
 
-//        //read charris_p1_mat1.txt and fill into matrix
-//        readArray("charris_p1_mat1.txt", matA);
-//
-//        //print array to output file
-//        charris_p1.printMatrix(matA, "charris_p2a_out12.txt");
+        System.out.println(isPossible(matA, matB));
 
     }//end main
 
@@ -35,85 +35,102 @@ public class charris_p2a {
     /*
     Methods:
      */
-    //addMatrix method will take in two matrices and add them
-    public static void addMatrix(int[][] mat){
-        //write code here
-    }//end addMatrix
 
-    //overloaded addMatrix method will handle doubles
-    public static void addMatrix(double[][] mat){
-        //write code here
-    }//end overloaded addMatrix
+    //isPossible method sees if matrix addition is possible
+    public static boolean isPossible(double[][] matA, double[][] matB){
 
-    //readArray reads in the values from the matrix and returns them
-    public static void readArray(String file, int[][] mat) throws IOException {
+        if ((matA.length == matB.length) && (matA[0].length == matB[0].length)){
 
-        //open file for writing
-        File fileName = new File(file);
-        Scanner inputFile = new Scanner(fileName);
+            return true;
 
-        //import matrix into matrix passed into method
-        //iterate through rows
-        for (int row = 0; row < mat.length; row++) {
+        }//end if
 
-            //iterate through columns
-            for (int col = 0; col < mat[0].length; col++) {
+        else {
+            return false;
+        }
 
-                //assigns values to arrays
-                mat[row][col] = inputFile.nextInt();
+    }//end isPossible
 
-            }//end for
+    //addMatrices method takes two matrices and adds them or returns an error
+//    public static double[][] addMatrices(double[][] matA, double[][] matB){
+//
+//    }//end addMatrices
 
-        }//end for
+    //mallocMat method allocates memory for matrix based on lines and columns in input file
+    public static double[][] mallocMat(String fileToRead) throws IOException {
 
-        //close file
-        inputFile.close();
-
-    }//end readArray
-
-    //overloads the readArray method to handle doubles
-    public static void readArray(String file, double[][] mat) throws IOException{
-        //write code here
-    }//end readArray
-
-    //mallocMat method allocates memory for matrix based on lines
-    //and columns in matrix
-    public static int[][] mallocMat(String fileToRead) throws FileNotFoundException {
-
-        //get the amount of rows and columns in the file
-        File fileName = new File(fileToRead);
-        Scanner inputFile = new Scanner(fileName);
-
-        //read in the amount of rows and then the columns to
-        //find how much memory is needed for matrix
+        //initialize rows and cols
         int rows = 0;
         int cols = 0;
-        boolean endOfData = false;
 
-//        while (!endOfData){
-//
-//            if (inputFile.next().charAt(0) != '\n'){
-//                cols++;
-//            }//end if
-//            else if (inputFile.next().charAt(0) == '\n'){
-//                rows++;
-//            }//end if
-//
-//            //checks to see if end of data reached
-//            else if (inputFile.next() == null){
-//                endOfData = true;
-//            }//eof reached
-//
-//        }//end while
+        //assign rows and cols via findCols and findRows method
+        rows = findRows(fileToRead);
+        cols = findCols(fileToRead);
 
-        //close the file
-        inputFile.close();
+        System.out.printf("The memory allocated is = mat[%d][%d]\n", rows, cols);
 
         //allocate memory and return it
-        int mat[][] = new int[rows][cols];
+        double mat[][] = new double[rows][cols];
 
         return mat;
 
     }//end mallocMat
+
+    //finds the amount of rows in the file passed in
+    public static int findRows(String fileToRead) throws IOException{
+
+        //open file for reading
+        File fileName = new File(fileToRead);
+        Scanner inputFile = new Scanner(fileName);
+
+        //initialize rows
+        int rows = 0;
+
+        //count the rows
+        while (inputFile.hasNextLine()){
+
+            //iterate rows
+            rows++;
+
+            //goes to next line
+            inputFile.nextLine();
+
+        }//end while
+
+        inputFile.close();
+
+        return rows;
+
+    }//end findRows
+
+    //finds the amount of columns in the file passed in
+    public static int findCols(String fileToRead) throws IOException{
+
+        //open file for reading
+        File fileName = new File(fileToRead);
+        Scanner inputFile = new Scanner(fileName);
+
+        //initialize cols
+        int cols = 0;
+
+        //counts total numbers in file
+        while (inputFile.hasNextDouble()){
+
+            //goes to next double
+            inputFile.nextDouble();
+
+            //iterate cols
+            cols++;
+
+        }//end while
+
+        //divide cols by rows
+        cols = cols/ findRows(fileToRead);
+
+        inputFile.close();
+
+        return cols;
+
+    }//end findCols
 
 }//end charris_p2a
