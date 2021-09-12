@@ -3,7 +3,7 @@ Caleb Harris
 CS2300 - Computational Linear Algebra
 Section: 001
 Due date: 9/13
-Assignment: PA 1
+Assignment: PA 1 - Part 1
 
 Description:
 This program will create 5 matrices based on certain criteria.

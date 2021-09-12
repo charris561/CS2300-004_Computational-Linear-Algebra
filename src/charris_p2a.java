@@ -3,7 +3,7 @@ Caleb Harris
 CS2300 - Computational Linear Algebra
 Section: 001
 Due date: 9/13
-Assignment: PA 1
+Assignment: PA 1 - Part 2a
 
 Description:
 This program will read two of the 2D Matrices created in part1,
@@ -119,9 +119,8 @@ public class charris_p2a {
 
         //add matrices if possible
         if (isPossible(matA, matB)){
-            double[][] mat12 = new double[matA.length][matB[0].length];
-            mat12 = addMatrices(matA, matB);
-            printMatrix(mat12, fileToPrint);
+            double[][] matAB = addMatrices(matA, matB);
+            printMatrix(matAB, fileToPrint);
         }
 
         else {
