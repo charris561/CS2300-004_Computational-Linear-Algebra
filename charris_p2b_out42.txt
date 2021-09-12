@@ -1,0 +1,1 @@
+Error: Multiplication is impossible
