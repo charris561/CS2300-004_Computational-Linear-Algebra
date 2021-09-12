@@ -23,7 +23,7 @@ public class charris_p1 {
         double[][] mat1 = new double[5][6];
 
         //fill mat1
-        fillArrayRowFirst(mat1, 0, 1);
+        fillArrayRowFirst(mat1, 1, 1);
 
         //print matrix to file
         printMatrix(mat1, "charris_p1_mat1.txt");
