@@ -19,6 +19,7 @@ PR - orthogonal projection
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class charris_p3 {
@@ -43,7 +44,7 @@ public class charris_p3 {
         String calcType = userInput.next().toUpperCase();
 
         //check if correct value was entered
-        checkCalcType(calcType);
+        calcType = checkCalcType(calcType);
 
         //initialize the input file to print to
         //open file for printing
@@ -205,7 +206,7 @@ public class charris_p3 {
     }//end printOutput
 
     //checkCalcType checks to see if the calcType is one of the possible computations
-    public static void checkCalcType(String calcType) {
+    public static String checkCalcType(String calcType) {
 
         //create scanner object
         Scanner userInput = new Scanner(System.in);
@@ -233,6 +234,8 @@ public class charris_p3 {
 
         }//end while
 
+        return calcType;
+
     }//end checkCalcType
 
     //gets vector inputs for calculations
@@ -242,12 +245,18 @@ public class charris_p3 {
         Scanner userInput = new Scanner(System.in);
 
         //prompt user for vector elements
-//***note: see if you can validate user input after program completed
-        System.out.print("Please enter first element of vector: ");
+        System.out.print("Please enter x-component of vector: ");
         double[] vector = new double[2];
         vector[0] = userInput.nextDouble();
-        System.out.print("Please enter second element of vector: ");
+
+        //validate user input
+
+
+        System.out.print("Please enter y-component of vector: ");
         vector[1] = userInput.nextDouble();
+
+        //validate user input
+
 
         System.out.printf("Vector = [%.1f][%.1f]\n", vector[0], vector[1]);
 
