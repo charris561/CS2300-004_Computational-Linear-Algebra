@@ -25,6 +25,12 @@ public class charris_p3 {
 
     public static void main(String[] args) throws IOException {
 
+        //initialize constants for file names
+        final String userDefInputName = "charris_p3_input.txt";//user defined input file
+        final String P3_OUT = "charris_p3_output.txt";//output file for user defined input file
+        final String CLASS_INPUT = "class_p3_input.txt";//class input file
+        final String CLASS_OUTPUT = "class_p3_output.txt";//class output file
+
         //generate the user defined input file
         //prompt user for type of calculation
         System.out.printf("Please enter the calculation type from the following list:\n" +
@@ -41,7 +47,7 @@ public class charris_p3 {
 
         //initialize the input file to print to
         //open file for printing
-        File fileName = new File("charris_p3_input.txt");
+        File fileName = new File(userDefInputName);
         PrintWriter outputFile = new PrintWriter(fileName);
 
         boolean moreCalculations = true; // used to get more rows of input if the user would like
@@ -109,6 +115,80 @@ public class charris_p3 {
         outputFile.close();
 
         //read in the user defined input file, parse for calc type, then proceed accordingly
+        //open file for reading
+        Scanner inputFile = new Scanner(fileName);
+
+        //open output file for writing
+        File userDefOut = new File(P3_OUT);
+        PrintWriter outputFile2 = new PrintWriter(userDefOut);
+
+        int calcCount = findRows(userDefInputName);//read how many rows there are in file
+        double[] vectorA = new double[2];//stores first vector value from file
+        double[] vectorB = new double[2];//stores second vector value from file
+        double[] result = new double[2];//stores resultant vector
+
+        //iterate through each row of file
+        for (int i = 0; i < calcCount; i++){
+
+            //store necessary values from file
+            calcType = inputFile.next();
+            vectorA[0] = inputFile.nextDouble();
+            vectorA[1] = inputFile.nextDouble();
+            vectorB[0] = inputFile.nextDouble();
+            vectorB[1] = inputFile.nextDouble();
+
+            //switch calcType to handle each computation type appropriately
+            switch (calcType){
+
+                case "AD":
+                    //compute then print results to output file
+                    result = add(vectorA, vectorB);
+                    printOutput(result, outputFile2);
+                    break;
+
+                case "SU":
+                    //compute then print results to output file
+                    result = subtract(vectorA, vectorB);
+                    printOutput(result, outputFile2);
+                    break;
+
+                case "SC":
+                    //compute then print results to output file
+                    result = scale(vectorA, vectorB);
+                    printOutput(result, outputFile2);
+                    break;
+
+                case "DO":
+                    //compute then print results to output file
+                    outputFile2.print(dotProd(vectorA, vectorB));
+                    break;
+
+                case "PR":
+                    //test to see if the vectors are orthogonal
+                    if (dotProd(vectorA, vectorB) == 0){
+                        break;
+                    }
+
+                    else {
+                        //compute then print results to output file
+//                        result = orthProj(vectorA, vectorB);
+                        printOutput(result, outputFile2);
+                        break;
+                    }
+
+            }//end switch
+
+            //goes to next line unless last calculation
+            if (i < (calcCount - 1)) {
+                outputFile2.println("");
+            }
+
+        }//end for loop
+
+        //close files
+        inputFile.close();
+        outputFile2.close();
+
 
     }//end main
 
@@ -120,6 +200,14 @@ public class charris_p3 {
                 calcType, vectorA[0], vectorA[1], vectorB[0], vectorB[1]);
 
     }//end printInput
+
+    //printOutput method takes in the calcType, result vector, and the file printwriter object then prints result to filename
+    public static void printOutput(double[] result, PrintWriter outputFile) throws IOException{
+
+        //prints out the calculation type then the resultant vector
+        outputFile.printf("%.1f %.1f", result[0], result[1]);
+
+    }//end printOutput
 
     //checkCalcType checks to see if the calcType is one of the possible computations
     public static void checkCalcType(String calcType){
@@ -171,5 +259,119 @@ public class charris_p3 {
         return vector;
 
     }//end getVector
+
+    //finds the amount of rows in the file passed in
+    public static int findRows(String fileToRead) throws IOException{
+
+        //open file for reading
+        File fileName = new File(fileToRead);
+        Scanner inputFile = new Scanner(fileName);
+
+        //initialize rows
+        int rows = 0;
+
+        //count the rows
+        while (inputFile.hasNextLine()){
+
+            //iterate rows
+            rows++;
+
+            //goes to next line
+            inputFile.nextLine();
+
+        }//end while
+
+        inputFile.close();
+
+        return rows;
+
+    }//end findRows
+
+    /*
+    Vector Operations Methods
+     */
+
+    //add method adds the passed in vectors
+    public static double[] add(double[] vectorA, double[] vectorB){
+
+        //initialize resultant vector
+        double[] result = new double[2];
+
+        //add x-components then assign to result
+        result[0] = vectorA[0] + vectorB[0];
+
+        //add y-components then assign to result
+        result[1] = vectorA[1] + vectorB[1];
+
+        return result;
+
+    }//end add
+
+    //subtract method subtracts the passed in vectors
+    public static double[] subtract(double[] vectorA, double[] vectorB){
+
+        //initialize resultant vector
+        double[] result = new double[2];
+
+        //add x-components then assign to result
+        result[0] = vectorA[0] - vectorB[0];
+
+        //add y-components then assign to result
+        result[1] = vectorA[1] - vectorB[1];
+
+        return result;
+
+    }//end subtract
+
+    //scale method scales the second vector by the magnitude of the first vector
+    public static double[] scale(double[] vectorA, double[] vectorB){
+
+        //initialize the result vector
+        double[] result = new double[2];
+
+        //find the magnitude of the first array
+        double magnitudeA = Math.sqrt((Math.pow(vectorA[0], 2)) + (Math.pow(vectorA[1], 2)));
+
+        //scale vectorB by magnitude of vectorA
+        result[0] = vectorB[0] * magnitudeA;
+        result[1] = vectorB[1] * magnitudeA;
+
+        return result;
+
+    }//end scale
+
+    //dotProd method computes the dot product of the passed in vectors
+    public static double dotProd(double[] vectorA, double[] vectorB){
+
+        //multiplies each index of vectors by respective indices then adds them to compute dot product
+        double result = 0;//stores the result of dot product operation
+
+        for (int i = 0; i < vectorA.length; i++){
+
+            result += (vectorA[i] * vectorB[i]);
+
+        }//end for
+
+        return result;
+
+    }//end dotProd
+
+    //orthProj method computes the orthogonal projection of vectorA onto vectorB
+    public static double[] orthProj(double[] v, double[] w){
+
+        //initialize resultant vector
+        double[] u = new double[2];
+
+        //find the length of v
+        double lengthV = Math.sqrt((Math.pow(v[0], 2)) + (Math.pow(v[1], 2)));
+
+        //compute orthogonal projection
+        //equation: u = ((v * w) / (length of v)^2) * v
+//        u[0] = ((dotProd(v, w) / Math.pow(lengthV, 2)) * v[0]);
+//        u[1] = ((dotProd(v, w) / Math.pow(lengthV, 2)) * v[1]);
+
+        return u;
+
+    }//end orthProj
 
 }//end charris_p3
