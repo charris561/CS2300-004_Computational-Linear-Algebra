@@ -112,7 +112,7 @@ public class charris_p2b {
     Methods
      */
 
-    //calcAddition method calculates the matrix addition and prints the output to a file
+    //calcAddition method calculates the matrix multiplication and prints the output to a file
     public static void calcMultiplication(double[][] matA, double[][]matB, String fileToPrint) throws IOException {
 
         //add matrices if possible
@@ -130,7 +130,7 @@ public class charris_p2b {
 
     }//end calcMultiplication
 
-    //addMatrices method takes two matrices and adds them or returns an error
+    //addMatrices method takes two matrices and multiplies them or returns an error
     public static double[][] multiplyMats(double[][] matA, double[][] matB){
 
         //allocate memory for result mat
