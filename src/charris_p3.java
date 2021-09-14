@@ -19,7 +19,6 @@ PR - orthogonal projection
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class charris_p3 {
@@ -185,6 +184,80 @@ public class charris_p3 {
         inputFile.close();
         outputFile2.close();
 
+        //open files for reading / writing
+        File classIn = new File(CLASS_INPUT);
+        Scanner classInput = new Scanner(classIn);
+        File classOut = new File(CLASS_OUTPUT);
+        PrintWriter classOutput = new PrintWriter(classOut);
+
+        //determine the amount of calculations in file
+        calcCount = 0;
+        calcCount = findRows(CLASS_INPUT);
+
+        //reset storage variables
+        vectorA[0] = 0;//stores first vector x- component
+        vectorA[1] = 0;//stores first vector y- component
+        vectorB[0] = 0;//stores second vector x- component
+        vectorB[1] = 0;//stores second vector y- component
+        result[0] = 0;//stores resultant vector x- component
+        result[1] = 0;//stores resultant vector y- component
+
+        //iterate through each row of file and handle data accordingly
+        for (int i = 0; i < calcCount; i++) {
+
+            //store necessary values from file
+            calcType = classInput.next();
+            vectorA[0] = classInput.nextDouble();
+            vectorA[1] = classInput.nextDouble();
+            vectorB[0] = classInput.nextDouble();
+            vectorB[1] = classInput.nextDouble();
+
+            //switch calcType to handle each computation type appropriately
+            switch (calcType) {
+
+                case "AD":
+                    //compute then print results to output file
+                    result = add(vectorA, vectorB);
+                    printOutput(result, classOutput);
+                    break;
+
+                case "SU":
+                    //compute then print results to output file
+                    result = subtract(vectorA, vectorB);
+                    printOutput(result, classOutput);
+                    break;
+
+                case "SC":
+                    //compute then print results to output file
+                    result = scale(vectorA, vectorB);
+                    printOutput(result, classOutput);
+                    break;
+
+                case "DO":
+                    //compute then print results to output file
+                    classOutput.print(dotProd(vectorA, vectorB));
+                    break;
+
+                case "PR":
+
+                    //compute then print results to output file
+                    result = orthProj(vectorA, vectorB);
+                    printOutput(result, classOutput);
+                    break;
+
+
+            }//end switch
+
+            //goes to next line unless last calculation
+            if (i < (calcCount - 1)) {
+                classOutput.println("");
+            }
+
+        }//end for loop
+
+        //close files
+        classInput.close();
+        classOutput.close();
 
     }//end main
 
