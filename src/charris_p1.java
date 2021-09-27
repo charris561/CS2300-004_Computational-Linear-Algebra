@@ -121,7 +121,7 @@ public class charris_p1 {
 
         }//end for
 
-    }//end overloaded fillArrayColFirst
+    }//end fillArrayColFirst
 
     //fill array row first-> fills value based on start val, iteration val
     public static void fillArrayRowFirst(double[][] mat, double startVal, double incrmntVal) {
