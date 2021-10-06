@@ -11,6 +11,8 @@ output either the result of the matrix multiplication of the
 two matrices, or output an error
 */
 
+package Assignment1;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;

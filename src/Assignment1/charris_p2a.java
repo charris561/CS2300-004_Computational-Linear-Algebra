@@ -11,6 +11,7 @@ add the two matrices, and either output the resultant matrix or
 output an error
 */
 
+package Assignment1;
 
 import java.io.File;
 import java.io.IOException;

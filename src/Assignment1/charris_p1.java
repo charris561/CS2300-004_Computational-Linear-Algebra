@@ -11,6 +11,8 @@ It will then write these matrices to files to be used in the
 next parts of this assignment.
 */
 
+package Assignment1;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
