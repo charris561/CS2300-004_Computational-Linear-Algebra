@@ -1,12 +1,13 @@
 package Assignment2.SourceCode;
 
+//line class represents a line object
 public class Line {
 
     //private data fields
-    private int[] startingPoint;
-    private int[] endingPoint;
-    private double[] midpoint;
-    private double slope;
+    private final int[] startingPoint;
+    private final int[] endingPoint;
+    private final double[] midpoint;
+    private final double slope;
 
     //constructor
     public Line (int[] startingPoint, int[] endingPoint){
