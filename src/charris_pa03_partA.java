@@ -17,7 +17,7 @@ import java.util.Scanner;
 
 public class charris_pa03_partA {
 
-    public static void main(String args[]) throws IOException {
+    public static void main(String[] args) throws IOException {
 
         //declare constants for input/output file names
         final String INPUT_FILE1 = "test_input_1.txt";
