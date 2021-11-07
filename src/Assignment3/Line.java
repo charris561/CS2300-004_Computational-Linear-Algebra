@@ -1,3 +1,5 @@
+package Assignment3;
+
 //line class represents a line object
 public class Line {
 
