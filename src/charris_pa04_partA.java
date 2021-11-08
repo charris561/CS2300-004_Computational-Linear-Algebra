@@ -6,7 +6,9 @@ Due date: 11/6
 Assignment: PA 4 - Part A
 
 Description:
-
+This program calculates if a triangle planar facet will be front facing or back facing,
+calculates the light intensity reflected off the triangular planar facet, then combines
+the two to simulate shading.
 */
 
 import java.util.*;

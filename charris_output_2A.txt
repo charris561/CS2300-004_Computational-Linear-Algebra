@@ -1,3 +1,0 @@
-0 1 1 1 
-0.99 0.96 0.42 1.00 
-Culling: 0 - Triangular planar facet is back facing.  Not Culling: 1 - Light Intensity: 0.96.  Not Culling: 1 - Light Intensity: 0.42.  Not Culling: 1 - Light Intensity: 1.00.  

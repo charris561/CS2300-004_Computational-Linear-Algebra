@@ -39,9 +39,19 @@ public class charris_pa04_partC {
     }//end main
 
     //partAComputations() function opens the passed in fileName completes the computations and outputs to a file
-    public static void partCComputations(String inputFileName, String outputFileName){
+    public static void partCComputations(String inputFileName, String outputFileName) throws IOException{
 
-        System.out.println("Will complete computations here...");
+        System.out.println("\n*****Starting Part C Computations*****\n");
+
+        //read point q on plane, vector n normal to plane, and point x from file
+        File fileInput = new File(inputFileName);
+        Scanner inputFile = new Scanner(fileInput);
+
+        double[][] pointOnPlane_Q = new double[3][1];
+        double[][] normalVector_N = new double[3][1];
+        double[][] point_X = new double[3][1];
+
+        
 
     }//end partAComputations
 
@@ -54,6 +64,30 @@ public class charris_pa04_partC {
         System.out.print("Please enter the input file name: ");
         Scanner userInput = new Scanner(System.in);
         fileName = userInput.next();
+
+        //see if file can be opened successfully
+        boolean fileFound = false;
+        boolean fileNotFound = true;
+        File inputFile;
+        Scanner inputFileScanner;
+
+        while (!fileFound) {
+            try {
+
+                inputFile = new File(fileName);
+                inputFileScanner = new Scanner(inputFile);
+                fileNotFound = false;
+
+            } catch (Exception FileNotFoundException) {
+
+                System.out.print("File was not found, please enter a new input file name: ");
+                fileName = userInput.next();
+
+            }//end try catch block
+
+            if (!fileNotFound){fileFound = true;}
+
+        }
 
         return fileName;
 
@@ -86,7 +120,7 @@ public class charris_pa04_partC {
             outputFileName += inputNum;
         }
 
-        outputFileName += "A";
+        outputFileName += "C.txt";
 
         return outputFileName;
 
