@@ -107,7 +107,7 @@ public class charris_pa04_partA {
         ArrayList<P04_Triangle> triangles = new ArrayList<>();
         for (int i = 0; i < numTriangles; i++){
 
-            //initialize points from input file
+            //initialize points p,q,r from input file
             double[][] p = new double[3][1];
             double[][] q = new double[3][1];
             double[][] r = new double[3][1];

@@ -111,7 +111,7 @@ public class charris_pa04_partB {
 
         double[][] x_prime = new double[3][1];
 
-        //eq. = x + [([q - x] * n) / v * n] * v
+        //eq. = x + [([q - x] * n) / v * n] v
 
         double[][] qSubX = subPointsOrVectors(pointOnPlane_Q, point_x);
 

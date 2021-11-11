@@ -117,13 +117,9 @@ public class P04_Triangle {
     //calculates the light intensity
     public double calcLightIntensity(double[][] lightDirection){
 
-        double lightIntensity = 0;
-
         //eq. light intensity = cos(theta) = (d * n) / (||n|| ||d||)
         // => sin(theta) = sqrt( 1 - cos^2(theta) )
-        double cosTheta = calcDotProd(lightDirection, normalVector) / (calcLength(normalVector) * calcLength(lightDirection));
-
-        lightIntensity = Math.sqrt( 1 - Math.pow( cosTheta, 2));
+        double lightIntensity = calcDotProd(lightDirection, normalVector) / (calcLength(normalVector) * calcLength(lightDirection));
 
         //if negative output 0
         if (lightIntensity < 0){
@@ -142,14 +138,13 @@ public class P04_Triangle {
         //if culling, then back facing and no shading. Else output 1 for not culling
         if (isCulling()){
 
-            shadeResult += "Culling: 0 - ";
-            shadeResult += "Triangular planar facet is back facing. ";
+            shadeResult += "0 ";
 
         }
         else {
 
-            shadeResult += "Not Culling: 1 - ";
-            shadeResult += String.format("Light Intensity: %.2f. ", calcLightIntensity(lightDirection));
+            shadeResult += "1->";
+            shadeResult += String.format("Intensity:%.2f ", calcLightIntensity(lightDirection));
 
         }
 
