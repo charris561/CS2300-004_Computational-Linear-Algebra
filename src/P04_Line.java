@@ -42,9 +42,37 @@ public class P04_Line {
         //eq = x + tv = p1 + u1(p2 - p1) + u2(p3 - p1)
         //let w = p2 - p1 && z = p3 - p1
         //p1, p2, and p3 are vertices of triangle
+        /*
+        Applying the above yields:
+        [ {w1, z1, -v1}, {w2, z2, -v2}, {w3, z3, -v3} ] [ {u1, u2, t} ] = [ {a, b, c} ]
+        where a = x1 - p1, b = x2 - p2, c = x3 - p3
+         */
+
+        //define w, z, a, b, and c
+
+
+
+        //do gaussian elimination to find u1, u2, and t
+        double u1 = 0;
+        double u2 = 0;
+        double t = 0;
+
+
+
 
         return isIntersecting;
 
     }//end isIntersecting
+
+    //private methods
+    private double[][] defineGaussElimMats(){
+
+        double[][] mat = new double[3][3];
+
+        //define w = 
+
+        return mat;
+
+    }//end defineGaussElimMats
 
 }//end Line
