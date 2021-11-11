@@ -10,7 +10,6 @@ Description:
 */
 
 import java.lang.management.PlatformLoggingMXBean;
-import java.lang.reflect.Array;
 import java.util.*;
 import java.io.*;
 
@@ -58,7 +57,7 @@ public class charris_pa04_partC {
         //print distances to first output file
         printDists(distances, outputFileName);
 
-        System.out.println("Part C - Sub part 2 calculations completed successfully. Please see this file for results: " + outputFileName);
+        System.out.println("Part C - Sub part 1 calculations completed successfully. Please see this file for results: " + outputFileName);
 
         /*
         Part 2
@@ -66,78 +65,10 @@ public class charris_pa04_partC {
         //create line from first line in file
         P04_Line line = fgetLine(inputFileName);
 
-        //create triangles from rest of inputs
-        ArrayList<P04_Triangle> triangles = fgetTriangles(inputFileName);
-
-        //iterate through triangles, see if intersecting and output that
-        printOutput(line, triangles, outputFileName2);
-
-        System.out.println("Part C - Sub part 1 calculations completed successfully. Please see this file for results: " + outputFileName2);
+        
 
 
     }//end partAComputations
-
-    //gets triangles from input file
-    public static ArrayList<P04_Triangle> fgetTriangles(String inputFileName) throws IOException{
-
-        //find how many triangles will be in file
-        int numTriangles = charris_pa04_partA.findRows(inputFileName) - 1;
-
-        //open file for reading
-        File file = new File(inputFileName);
-        Scanner inputFile = new Scanner(file);
-
-        //create triangles for each row after first
-        ArrayList<P04_Triangle> triangles = new ArrayList<>();
-        inputFile.nextLine();
-
-        for (int i = 0; i < numTriangles; i++){
-
-            //initialize points p,q,r from input file
-            double[][] p = new double[3][1];
-            double[][] q = new double[3][1];
-            double[][] r = new double[3][1];
-
-            //fill from input file
-            for (int j = 0; j < p.length; j++){
-
-                for (int k = 0; k < p[0].length; k++){
-
-                    p[j][k] = inputFile.nextDouble();
-
-                }//end iterating columns
-
-            }//end iterating rows
-            for (int j = 0; j < q.length; j++){
-
-                for (int k = 0; k < q[0].length; k++){
-
-                    q[j][k] = inputFile.nextDouble();
-
-                }//end iterating columns
-
-            }//end iterating rows
-            for (int j = 0; j < r.length; j++){
-
-                for (int k = 0; k < r[0].length; k++){
-
-                    r[j][k] = inputFile.nextDouble();
-
-                }//end iterating columns
-
-            }//end iterating rows
-
-            //create triangle
-            P04_Triangle triangle = new P04_Triangle(p, q, r);
-
-            //add to triangles arraylist
-            triangles.add(triangle);
-
-        }//end getting triangles
-
-        return triangles;
-
-    }//end fgetTriangles()
 
     //gets the line from the first line in input
     public static P04_Line fgetLine(String inputFileName) throws IOException{
@@ -375,30 +306,5 @@ public class charris_pa04_partC {
         return userChoice;
 
     }//end getUserChoice()
-
-    //prints output to second output file
-    public static void printOutput(P04_Line line,ArrayList<P04_Triangle> triangles ,String fileToPrint) throws IOException{
-
-        //open file for printing
-        File fileName = new File(fileToPrint);
-        PrintWriter outputFile = new PrintWriter(fileName);
-
-        //iterate through arraylist printing distances
-        int numTriangles = triangles.size();
-        for (int i = 0; i < numTriangles; i++){
-            if (line.isIntersecting(triangles.get(i))){
-                outputFile.printf("Intersection = {%.2f, %.2f, %.2f}\n",
-                        line.findIntersection(triangles.get(i))[0][0],
-                        line.findIntersection(triangles.get(i))[1][0],
-                        line.findIntersection(triangles.get(i))[2][0]);
-            }
-            else {outputFile.println("No intersection");}
-        }
-
-        //close output file
-        outputFile.close();
-
-    }//end printDists
-
 
 }//end charris_pa04_partC
