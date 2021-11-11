@@ -68,12 +68,8 @@ public class P04_Triangle {
     //setters
     public void setViewVector(double[][] eyeLocation){
 
-        //eq =  c - e/ ||e - c||
-        double[][] cSubE = new double[3][1];
+        //eq =  e - c/ ||e - c||
         double[][] eSubC = new double[3][1];
-
-        //calculate c - e
-        cSubE = subPointsOrVectors(centroid, eyeLocation);
 
         //calculate e - c
         for (int r = 0; r < eSubC.length; r++){
@@ -94,7 +90,7 @@ public class P04_Triangle {
 
             for (int c = 0; c < viewVector[0].length; c++){
 
-                viewVector[r][c] = cSubE[r][c] / lengthOfESubC;
+                viewVector[r][c] = eSubC[r][c] / lengthOfESubC;
 
             }//end iterating columns
 

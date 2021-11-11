@@ -52,27 +52,8 @@ public class P04_Line {
 
 
 
-        //do gaussian elimination to find u1, u2, and t
-        double u1 = 0;
-        double u2 = 0;
-        double t = 0;
-
-
-
-
         return isIntersecting;
 
     }//end isIntersecting
-
-    //private methods
-    private double[][] defineGaussElimMats(){
-
-        double[][] mat = new double[3][3];
-
-        //define w = 
-
-        return mat;
-
-    }//end defineGaussElimMats
 
 }//end Line
