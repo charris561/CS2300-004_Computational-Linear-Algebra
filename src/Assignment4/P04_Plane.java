@@ -2,6 +2,8 @@
 P04_Plane represents plane for programming assignment 4
  */
 
+package Assignment4;
+
 public class P04_Plane {
 
     //private data fields

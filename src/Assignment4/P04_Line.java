@@ -1,3 +1,5 @@
+package Assignment4;
+
 //line class represents a line object
 public class P04_Line {
 

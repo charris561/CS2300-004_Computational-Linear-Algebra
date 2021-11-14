@@ -2,6 +2,8 @@
 Triangle class represents a triangle with points p, q, and r points in 3D
  */
 
+package Assignment4;
+
 public class P04_Triangle {
 
     //private data fields

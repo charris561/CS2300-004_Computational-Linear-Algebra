@@ -11,6 +11,8 @@ calculates the light intensity reflected off the triangular planar facet, then c
 the two to simulate shading.
 */
 
+package Assignment4;
+
 import java.util.*;
 import java.io.*;
 
