@@ -30,7 +30,11 @@ public class charris_pa05_partA {
         //determine if input is valid and fill matrix with values from file. If it is valid, proceed
         if (isValidInput(INPUT_FILE_NAME, mat)){
 
-            
+            //initial guess vector
+            double[][] guessVec = {{1}, {1}, {1}};
+            //https://www.codesansar.com/numerical-methods/power-method-algorithm-for-finding-dominant-eigen-value-and-eigen-vector.htm
+            //https://towardsdatascience.com/pagerank-algorithm-fully-explained-dc794184b4af
+            //https://www.youtube.com/watch?v=nRaT7O_vn1s
 
         }
         else {
@@ -38,6 +42,40 @@ public class charris_pa05_partA {
         }
 
     }//main
+
+    //returns multiplication of 2 matrices
+    public static double[][] multiplyMats(double[][] matA, double[][] matB){
+
+        //allocate memory for result mat
+        double[][] resultMat = new double[matA.length][matB[0].length];
+
+        double sum = 0; // used to store the sum or row * col
+        int i = 0; // used to track rows in matA
+        int j = 0; // used to track columns in matB
+        int k = 0; // used to track rows in matB
+
+        //multiplies each row by columns
+        for (i = 0; i < matA.length; i++){
+
+            for (j = 0; j < matB[0].length; j++){
+
+                for (k = 0; k < matB.length; k++){
+
+                    sum += matA[i][k] * matB[k][j];
+
+                }//end matB row for loop
+
+                //assigns the sum value to result matrix then resets sum
+                resultMat[i][j] = sum;
+                sum = 0;
+
+            }//end matB col for loop
+
+        }//end matA row for loop
+
+        return resultMat;
+
+    }//end multiplyMats
 
     //returns boolean based on if data from input file is valid
     public static boolean isValidInput(String inputFileName, double[][] mat) throws IOException{
