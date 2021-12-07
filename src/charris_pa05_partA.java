@@ -30,7 +30,7 @@ public class charris_pa05_partA {
         //determine if input is valid and fill matrix with values from file. If it is valid, proceed
         if (isValidInput(INPUT_FILE_NAME, mat)){
 
-
+            
 
         }
         else {
